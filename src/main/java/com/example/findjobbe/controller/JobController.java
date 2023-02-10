@@ -25,7 +25,7 @@ public class JobController {
     }
 
     @PostMapping
-    public ResponseEntity<Job> creatCandidate(@RequestBody Job job){
+    public ResponseEntity<Job> creatJob(@RequestBody Job job){
         return new ResponseEntity<>(jobService.save(job), HttpStatus.CREATED);
     }
 
@@ -39,7 +39,7 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Job> deleteCandidate(@PathVariable Long id) {
+    public ResponseEntity<Job> deleteJob(@PathVariable Long id) {
         Optional<Job> jobOptional = jobService.findOne(id);
         if (!jobOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,7 +49,7 @@ public class JobController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Job> updateCandidate(@PathVariable Long id, @RequestBody Job job) {
+    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job) {
         Optional<Job> jobOptional = jobService.findOne(id);
         if (!jobOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
