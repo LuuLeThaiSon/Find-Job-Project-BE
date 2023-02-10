@@ -20,8 +20,8 @@ public class JobController {
 
     @GetMapping
     public ResponseEntity<List<Job>> showAll() {
-        List<Job> candidates = jobService.findAll();
-        return new ResponseEntity<>(candidates, HttpStatus.OK);
+        List<Job> jobs = jobService.findAll();
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
     @PostMapping
