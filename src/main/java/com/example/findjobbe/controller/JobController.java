@@ -57,9 +57,5 @@ public class JobController {
         job.setId(jobOptional.get().getId());
         return new ResponseEntity<>(jobService.save(job), HttpStatus.OK);
     }
-    @PostMapping("/set/{id}")
-    public ResponseEntity<Job> setStatus(@PathVariable Long id) {
-        return jobService.setStatus(id);
-    }
 
 }
