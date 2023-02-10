@@ -39,6 +39,6 @@ public class Company {
 	private String website;
 	@ManyToOne(targetEntity = Role.class)
 	private Role role;
-	private int status;
+	private boolean status;
 
 }
