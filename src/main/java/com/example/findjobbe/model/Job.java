@@ -30,15 +30,16 @@ public class Job {
 	@NotNull
 	private boolean type;
 	@NotNull
-	private Date expriredDate;
+	private Date expiredDate;
 	@NotNull
 	private String description;
 	@NotNull
 	private int quantity;
 	@NotNull
-	private boolean gender;
+	private int gender;
 	@ManyToOne(targetEntity = Location.class)
 	private Location location;
 	@ManyToOne(targetEntity = Company.class)
 	private Company company;
+	private boolean status;
 }
