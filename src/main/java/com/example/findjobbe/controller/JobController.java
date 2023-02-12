@@ -1,5 +1,6 @@
 package com.example.findjobbe.controller;
 
+import com.example.findjobbe.model.Company;
 import com.example.findjobbe.model.Job;
 import com.example.findjobbe.service.impl.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,11 @@ public class JobController {
         job.setId(jobOptional.get().getId());
         return new ResponseEntity<>(jobService.save(job), HttpStatus.OK);
     }
+
+    @GetMapping("/quantity/{idCompany}")
+    public ResponseEntity<Iterable<Job>> findAllJobsInCompany(@PathVariable Long idCompany) {
+        return new ResponseEntity<>(jobService.findAllJobsInCompany(idCompany), HttpStatus.OK);
+    }
+
 
 }
