@@ -50,6 +50,11 @@ public class JobService implements IJobService {
         return new ResponseEntity<>(job.get(), HttpStatus.OK);
     }
 
+    @Override
+    public List<Job> findAllByStatusIsTrueAndAndExpiredDate() {
+        return jobRepository.findAllByStatusIsTrueAndAndExpiredDate();
+    }
+
     public List<Job> findAllJobsInCompany(Long id) {
         return jobRepository.findJobsByCompanyId(id);
     }

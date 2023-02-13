@@ -24,6 +24,12 @@ public class JobController {
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
+    @GetMapping("/status")
+    public ResponseEntity<List<Job>> findAllByStatusIsTrueAndAndExpiredDate() {
+        List<Job> jobs = jobService.findAllByStatusIsTrueAndAndExpiredDate();
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Job> creatJob(@RequestBody Job job){
         return new ResponseEntity<>(jobService.save(job), HttpStatus.CREATED);
