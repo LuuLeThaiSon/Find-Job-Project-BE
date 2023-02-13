@@ -49,4 +49,8 @@ public class JobService implements IJobService {
         jobRepository.save(job.get());
         return new ResponseEntity<>(job.get(), HttpStatus.OK);
     }
+
+    public List<Job> findAllJobsInCompany(Long id) {
+        return jobRepository.findJobsByCompanyId(id);
+    }
 }
