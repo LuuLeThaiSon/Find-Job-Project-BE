@@ -42,4 +42,6 @@ public class Job {
 	@ManyToOne(targetEntity = Company.class)
 	private Company company;
 	private boolean status;
+
+	
 }

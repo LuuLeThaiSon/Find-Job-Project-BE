@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Controller
 @CrossOrigin("*")
-@RequestMapping("/company")
+@RequestMapping("/companies")
 public class CompanyController {
 
     @Autowired
@@ -61,4 +61,5 @@ public class CompanyController {
         companyService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
