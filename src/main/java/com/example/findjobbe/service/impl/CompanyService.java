@@ -34,4 +34,14 @@ public class CompanyService implements ICompanyService {
     public void delete(Long aLong) {
         companyRepository.deleteById(aLong);
     }
+
+    @Override
+    public List<Company> findTopCompaniesWithHighRecruitmentDemand() {
+        return companyRepository.findTopCompaniesWithHighRecruitmentDemand();
+    }
+
+    @Override
+    public Long countAllJobsByCompanyId(Long id) {
+        return companyRepository.countAllJobsByCompanyId(id);
+    }
 }
