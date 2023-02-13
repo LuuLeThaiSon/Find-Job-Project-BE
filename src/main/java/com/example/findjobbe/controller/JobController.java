@@ -1,6 +1,5 @@
 package com.example.findjobbe.controller;
 
-import com.example.findjobbe.model.Company;
 import com.example.findjobbe.model.Job;
 import com.example.findjobbe.service.impl.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,12 @@ public class JobController {
     @GetMapping
     public ResponseEntity<List<Job>> showAll() {
         List<Job> jobs = jobService.findAll();
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<List<Job>> findAllByStatusIsTrueAndAndExpiredDate() {
+        List<Job> jobs = jobService.findAllByStatusIsTrueAndAndExpiredDate();
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
@@ -59,9 +64,9 @@ public class JobController {
         return new ResponseEntity<>(jobService.save(job), HttpStatus.OK);
     }
 
-    @GetMapping("/quantity/{idCompany}")
-    public ResponseEntity<Iterable<Job>> findAllJobsInCompany(@PathVariable Long idCompany) {
-        return new ResponseEntity<>(jobService.findAllJobsInCompany(idCompany), HttpStatus.OK);
+    @PostMapping("/set/{id}")
+    public ResponseEntity<Job> setStatus(@PathVariable Long id) {
+        return jobService.setStatus(id);
     }
 
 

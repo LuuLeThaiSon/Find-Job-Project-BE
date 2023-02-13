@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -60,6 +61,17 @@ public class CompanyController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         companyService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/quantity-desc")
+    public ResponseEntity<List<Company>> findTopCompanies() {
+        return new ResponseEntity<>(companyService.findTopCompaniesWithHighRecruitmentDemand(),HttpStatus.OK);
+    }
+
+    @GetMapping("/count/{id}")
+    public ResponseEntity<Long> countAllJobsByCompanyId(@PathVariable Long id) {
+        Long count = companyService.countAllJobsByCompanyId(id);
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
 }

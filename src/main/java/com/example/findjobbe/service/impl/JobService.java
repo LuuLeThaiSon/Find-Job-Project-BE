@@ -4,6 +4,8 @@ import com.example.findjobbe.model.Job;
 import com.example.findjobbe.repository.JobRepository;
 import com.example.findjobbe.service.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,26 @@ public class JobService implements IJobService {
     @Override
     public void delete(Long id) {
         jobRepository.deleteById(id);
+    }
+
+    @Override
+    public ResponseEntity<Job> setStatus(Long id) {
+        Optional<Job> job = jobRepository.findById(id);
+        if (!job.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (job.get().isStatus()) {
+            job.get().setStatus(false);
+        } else {
+            job.get().setStatus(true);
+        }
+        jobRepository.save(job.get());
+        return new ResponseEntity<>(job.get(), HttpStatus.OK);
+    }
+
+    @Override
+    public List<Job> findAllByStatusIsTrueAndAndExpiredDate() {
+        return jobRepository.findAllByStatusIsTrueAndAndExpiredDate();
     }
 
     public List<Job> findAllJobsInCompany(Long id) {
