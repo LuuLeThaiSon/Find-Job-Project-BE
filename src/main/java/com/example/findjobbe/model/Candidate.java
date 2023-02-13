@@ -24,4 +24,6 @@ public class Candidate {
 	private String tel;
 	@ManyToOne(targetEntity = Role.class)
 	private Role role;
+	private String avatar;
+
 }
