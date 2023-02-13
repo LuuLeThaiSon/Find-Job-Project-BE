@@ -32,4 +32,9 @@ public class JobService implements IJobService {
     public void delete(Long id) {
         jobRepository.deleteById(id);
     }
+
+
+    public List<Job> findAllJobsInCompanyId(Long id) {
+        return jobRepository.findJobsByCompanyId(id);
+    }
 }
