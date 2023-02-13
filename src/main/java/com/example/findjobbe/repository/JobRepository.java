@@ -13,4 +13,7 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     @Query(value = "select j from Job j where j.expiredDate > current_date and j.status = true")
     List<Job> findAllByStatusIsTrueAndAndExpiredDate();
+
+    @Query(value = "SELECT j from Job j where j.status = true and j.expiredDate >= current_date and j.company.id = ?1")
+    List<Job> findCurrentOpeningJobsByCompany(Long id);
 }

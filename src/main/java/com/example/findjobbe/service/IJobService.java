@@ -10,4 +10,7 @@ public interface IJobService extends ICoreCrud<Job, Long>{
     ResponseEntity<Job> setStatus(Long id);
 
     List<Job> findAllByStatusIsTrueAndAndExpiredDate();
+
+    List<Job> findCurrentOpeningJobsByCompany(Long id);
+
 }

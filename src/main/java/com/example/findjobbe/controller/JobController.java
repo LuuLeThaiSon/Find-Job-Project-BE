@@ -69,5 +69,10 @@ public class JobController {
         return jobService.setStatus(id);
     }
 
+    @GetMapping("/current/opening/{id}")
+    public ResponseEntity<List<Job>> findCurrentOpeningJobsByCompany(@PathVariable Long id) {
+        List<Job> jobs = jobService.findCurrentOpeningJobsByCompany(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
 
 }
