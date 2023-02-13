@@ -68,4 +68,10 @@ public class CompanyController {
         return new ResponseEntity<>(companyService.findTopCompaniesWithHighRecruitmentDemand(),HttpStatus.OK);
     }
 
+    @GetMapping("/count/{id}")
+    public ResponseEntity<Long> countAllJobsByCompanyId(@PathVariable Long id) {
+        Long count = companyService.countAllJobsByCompanyId(id);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
 }

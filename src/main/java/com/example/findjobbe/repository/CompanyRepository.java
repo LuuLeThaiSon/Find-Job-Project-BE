@@ -13,4 +13,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
             "group by c.name order by sum(quantity) desc",nativeQuery = true)
     List<Company> findTopCompaniesWithHighRecruitmentDemand();
 
+    @Query(value = "select count(j) from Job j join Company c on j.company.id = c.id where j.company.id = ?1")
+    Long countAllJobsByCompanyId(Long id);
 }

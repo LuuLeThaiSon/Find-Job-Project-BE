@@ -39,4 +39,9 @@ public class CompanyService implements ICompanyService {
     public List<Company> findTopCompaniesWithHighRecruitmentDemand() {
         return companyRepository.findTopCompaniesWithHighRecruitmentDemand();
     }
+
+    @Override
+    public Long countAllJobsByCompanyId(Long id) {
+        return companyRepository.countAllJobsByCompanyId(id);
+    }
 }

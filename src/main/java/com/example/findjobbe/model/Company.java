@@ -41,4 +41,7 @@ public class Company {
 	private Role role;
 	private boolean status;
 
+	@Transient
+	private int countJobs;
+
 }
