@@ -3,6 +3,7 @@ package com.example.findjobbe.controller;
 import com.example.findjobbe.model.Job;
 import com.example.findjobbe.service.impl.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Controller
 @CrossOrigin("*")
 @RequestMapping("/jobs")
+//@PropertySource("classpath:application.properties")
 public class JobController {
     @Autowired
     private JobService jobService;
@@ -57,5 +59,11 @@ public class JobController {
         job.setId(jobOptional.get().getId());
         return new ResponseEntity<>(jobService.save(job), HttpStatus.OK);
     }
+
+    @PostMapping("/set/{id}")
+    public ResponseEntity<Job> setStatus(@PathVariable Long id) {
+        return jobService.setStatus(id);
+    }
+
 
 }
