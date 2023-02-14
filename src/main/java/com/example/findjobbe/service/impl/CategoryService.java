@@ -33,4 +33,9 @@ public class CategoryService implements ICategoryService {
 	public void delete(Long id) {
 
 	}
+
+	@Override
+	public List<Category> findCategoriesByJobId(Long id) {
+		return categoryRepository.findCategoriesByJobId(id);
+	}
 }
