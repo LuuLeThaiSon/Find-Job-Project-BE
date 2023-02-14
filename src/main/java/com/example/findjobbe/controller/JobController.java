@@ -69,9 +69,19 @@ public class JobController {
         return jobService.setStatus(id);
     }
 
+    @GetMapping("/current/opening/{id}")
+    public ResponseEntity<List<Job>> findCurrentOpeningJobsByCompany(@PathVariable Long id) {
+        List<Job> jobs = jobService.findCurrentOpeningJobsByCompany(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
     @GetMapping("/category/{id}")
     public ResponseEntity<List<Job>> findJobsByCategoryId(@PathVariable Long id) {
         return new ResponseEntity<>(jobService.findJobsByCategoryId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/company/{id}")
+    public ResponseEntity<List<Job>> findAllJobsByCompany(@PathVariable Long id) {
+        List<Job> jobs = jobService.findAllJobsByCompanySortByIdDesc(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
 }

@@ -16,12 +16,12 @@ public class CategoryService implements ICategoryService {
 
 	@Override
 	public List<Category> findAll() {
-		return null;
+		return categoryRepository.findAll();
 	}
 
 	@Override
 	public Optional<Category> findOne(Long id) {
-		return Optional.empty();
+		return categoryRepository.findById(id);
 	}
 
 	@Override

@@ -63,4 +63,14 @@ public class JobService implements IJobService {
     public List<Job> findAllJobsInCompany(Long id) {
         return jobRepository.findJobsByCompanyId(id);
     }
+
+    @Override
+    public List<Job> findCurrentOpeningJobsByCompany(Long id) {
+        return jobRepository.findCurrentOpeningJobsByCompany(id);
+    }
+
+    @Override
+    public List<Job> findAllJobsByCompanySortByIdDesc(Long id) {
+        return jobRepository.findJobsByCompanyIdOrderByIdDesc(id);
+    }
 }

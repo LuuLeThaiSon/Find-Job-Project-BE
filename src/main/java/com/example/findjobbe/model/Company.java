@@ -40,6 +40,7 @@ public class Company {
 	@ManyToOne(targetEntity = Role.class)
 	private Role role;
 	private boolean status;
+	private String banner;
 
 	@Transient
 	private int countJobs;

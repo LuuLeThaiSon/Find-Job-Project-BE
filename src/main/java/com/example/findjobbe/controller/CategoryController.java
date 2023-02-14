@@ -17,8 +17,18 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/categories")
 public class CategoryController {
-    @Autowired
-    private CategoryService categoryService;
+	@Autowired
+	private CategoryService categoryService;
+
+	@GetMapping
+	public ResponseEntity<List<Category>> findAll() {
+		return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
+	}
+
+	@GetMapping("/{id}")
+	private ResponseEntity<Category> findOne(@PathVariable Long id) {
+		return new ResponseEntity<>(categoryService.findOne(id).get(), HttpStatus.OK);
+	}
 
     @GetMapping("/job/{id}")
     public ResponseEntity<List<Category>> findCategoriesByCompanyId(@PathVariable Long id) {
