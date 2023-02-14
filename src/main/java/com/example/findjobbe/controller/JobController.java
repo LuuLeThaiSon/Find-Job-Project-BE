@@ -75,4 +75,9 @@ public class JobController {
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
+    @GetMapping("/company/{id}")
+    public ResponseEntity<List<Job>> findAllJobsByCompany(@PathVariable Long id) {
+        List<Job> jobs = jobService.findAllJobsByCompanySortByIdDesc(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
 }

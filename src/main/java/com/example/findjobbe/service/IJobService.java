@@ -12,5 +12,6 @@ public interface IJobService extends ICoreCrud<Job, Long>{
     List<Job> findAllByStatusIsTrueAndAndExpiredDate();
 
     List<Job> findCurrentOpeningJobsByCompany(Long id);
+    List<Job> findAllJobsByCompanySortByIdDesc(Long id);
 
 }
