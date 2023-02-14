@@ -23,5 +23,5 @@ public class Category {
 			@JoinColumn(name = "job_id")
 		}
 	)
-	private Set<Company> companies = new HashSet<>();
+	private Set<Job> jobs = new HashSet<>();
 }

@@ -42,7 +42,4 @@ public class Company {
 	private boolean status;
 	private String banner;
 
-	@Transient
-	private int countJobs;
-
 }
