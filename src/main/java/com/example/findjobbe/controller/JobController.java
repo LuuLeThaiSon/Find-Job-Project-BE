@@ -64,7 +64,7 @@ public class JobController {
         return new ResponseEntity<>(jobService.save(job), HttpStatus.OK);
     }
 
-    @PostMapping("/set/{id}")
+    @PutMapping("/set/{id}")
     public ResponseEntity<Job> setStatus(@PathVariable Long id) {
         return jobService.setStatus(id);
     }
