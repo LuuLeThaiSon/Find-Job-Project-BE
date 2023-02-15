@@ -32,7 +32,9 @@ public class JobController {
 
     @PostMapping
     public ResponseEntity<Job> creatJob(@RequestBody Job job){
-        return new ResponseEntity<>(jobService.save(job), HttpStatus.CREATED);
+        jobService.save(job);
+        job.setCode("CODE" + job.getCompany().getCode() + job.getId());
+        return new ResponseEntity<>(job, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

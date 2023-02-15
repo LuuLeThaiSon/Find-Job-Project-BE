@@ -11,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Controller
 @CrossOrigin("*")
@@ -43,6 +45,10 @@ public class CompanyController {
 
     @PostMapping
     public ResponseEntity<Company> create(@RequestBody Company company) {
+        char[] ch = new char[3];
+        company.getShortName().getChars(0,3,ch,0);
+        String str = new String(ch);
+        company.setCode(str + company.getId() + (int)(((Math.random()) * ((9999 - 1000) + 1)) + 1000));
         return new ResponseEntity<>(companyService.save(company), HttpStatus.CREATED);
     }
 
