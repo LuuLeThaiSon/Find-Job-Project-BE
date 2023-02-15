@@ -12,16 +12,14 @@ public class Candidate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
 	private String name;
-	@NotNull
-	@Email
-	@Column(unique = true)
 	private String email;
-	@NotNull
-	@Size(min = 8)
 	private String password;
 	private String tel;
 	@ManyToOne(targetEntity = Role.class)
 	private Role role;
+	private String avatar;
+
+	private Boolean status;
+
 }

@@ -64,4 +64,10 @@ public class JobController {
 
     }
 
+    @PostMapping("/set/{id}")
+    public ResponseEntity<Job> setStatus(@PathVariable Long id) {
+        return jobService.setStatus(id);
+    }
+
+
 }

@@ -41,5 +41,9 @@ public class Job {
 	private Location location;
 	@ManyToOne(targetEntity = Company.class)
 	private Company company;
+
 	private boolean status;
+
+
+	
 }

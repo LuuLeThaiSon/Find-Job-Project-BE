@@ -17,20 +17,16 @@ public class Company {
 	@NotNull
 	@Column(unique = true)
 	private String name;
-	@NotNull
 	private String shortName;
 	private String code;
 	@Email
 	@NotNull
 	@Column(unique = true)
 	private String email;
-	@NotNull
-	@Size(min = 8)
-	@Min(value = 8)
 	private String password;
 	@NotNull
 	private String avatar;
-	@NotNull
+	@Column()
 	private String description;
 	private String address;
 	private int numberOfEmployees;
@@ -39,6 +35,6 @@ public class Company {
 	private String website;
 	@ManyToOne(targetEntity = Role.class)
 	private Role role;
-	private int status;
+	private boolean status;
 
 }

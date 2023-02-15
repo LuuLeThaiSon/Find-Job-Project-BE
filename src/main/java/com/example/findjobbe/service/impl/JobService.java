@@ -33,6 +33,25 @@ public class JobService implements IJobService {
         jobRepository.deleteById(id);
     }
 
+    @Override
+    public ResponseEntity<Job> setStatus(Long id) {
+        Optional<Job> job = jobRepository.findById(id);
+        if (!job.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (job.get().isStatus()) {
+            job.get().setStatus(false);
+        } else {
+            job.get().setStatus(true);
+        }
+        jobRepository.save(job.get());
+        return new ResponseEntity<>(job.get(), HttpStatus.OK);
+    }
+
+    public List<Job> findAllJobsInCompany(Long id) {
+        return jobRepository.findJobsByCompanyId(id);
+    }
+
 
     public List<Job> findAllJobsInCompanyId(Long id) {
         return jobRepository.findJobsByCompanyId(id);
