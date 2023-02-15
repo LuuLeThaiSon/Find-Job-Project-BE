@@ -84,4 +84,13 @@ public class JobController {
         List<Job> jobs = jobService.findAllJobsByCompanySortByIdDesc(id);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Job>>  findJobsByTitleAndLocationAndCompanyAndSalaryMin(@RequestParam(name = "text") String text,
+                                                                                       @RequestParam(name = "locationId") Long locationId,
+                                                                                       @RequestParam(name = "categoryId") Long categoryId) {
+//                                                                                       @RequestParam(name = "salaryMin") Double salaryMin) {
+        List<Job> jobs = jobService.findJobsByTitleAndLocationAndCompanyAndSalaryMin(text,locationId,categoryId);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
 }
