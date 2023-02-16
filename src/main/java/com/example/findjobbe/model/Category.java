@@ -13,14 +13,14 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@ManyToMany(targetEntity = Job.class)
+	@ManyToMany(targetEntity = Company.class)
 	@JoinTable(
-		name = "category_job",
+		name = "category_company",
 		joinColumns = {
 			@JoinColumn(name = "category_id")
 		},
 		inverseJoinColumns = {
-			@JoinColumn(name = "job_id")
+			@JoinColumn(name = "company_id")
 		}
 	)
 	private Set<Company> companies = new HashSet<>();

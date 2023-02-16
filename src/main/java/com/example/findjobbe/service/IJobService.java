@@ -5,7 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Repository
+
+
 public interface IJobService extends ICoreCrud<Job, Long>{
     ResponseEntity<Job> setStatus(Long id);
+
+    List<Job> findAllByStatusIsTrueAndAndExpiredDate();
+
+    List<Job> findCurrentOpeningJobsByCompany(Long id);
+    List<Job> findAllJobsByCompanySortByIdDesc(Long id);
+
+
+    List<Job> findJobsByCategoryId(Long id);
 }

@@ -16,12 +16,12 @@ public class CategoryService implements ICategoryService {
 
 	@Override
 	public List<Category> findAll() {
-		return null;
+		return categoryRepository.findAll();
 	}
 
 	@Override
 	public Optional<Category> findOne(Long id) {
-		return Optional.empty();
+		return categoryRepository.findById(id);
 	}
 
 	@Override
@@ -32,5 +32,15 @@ public class CategoryService implements ICategoryService {
 	@Override
 	public void delete(Long id) {
 
+	}
+
+	@Override
+	public List<Category> findCategoriesByJobId(Long id) {
+		return categoryRepository.findCategoriesByJobId(id);
+	}
+
+	@Override
+	public List<Category> findCategoriesByCompanyId(Long id) {
+		return categoryRepository.findCategoriesByCompanyId(id);
 	}
 }

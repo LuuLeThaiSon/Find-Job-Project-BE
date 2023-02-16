@@ -17,6 +17,7 @@ public class Company {
 	@NotNull
 	@Column(unique = true)
 	private String name;
+	@NotNull
 	private String shortName;
 	private String code;
 	@Email
@@ -26,7 +27,7 @@ public class Company {
 	private String password;
 	@NotNull
 	private String avatar;
-	@Column()
+	@NotNull
 	private String description;
 	private String address;
 	private int numberOfEmployees;
@@ -36,5 +37,6 @@ public class Company {
 	@ManyToOne(targetEntity = Role.class)
 	private Role role;
 	private boolean status;
+	private String banner;
 
 }

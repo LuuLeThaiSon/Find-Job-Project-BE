@@ -20,13 +20,22 @@ public class JobController {
 
     @GetMapping
     public ResponseEntity<List<Job>> showAll() {
-        List<Job> candidates = jobService.findAll();
-        return new ResponseEntity<>(candidates, HttpStatus.OK);
+        List<Job> jobs = jobService.findAll();
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<List<Job>> findAllByStatusIsTrueAndAndExpiredDate() {
+        List<Job> jobs = jobService.findAllByStatusIsTrueAndAndExpiredDate();
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Job> creatJob(@RequestBody Job job){
-        return new ResponseEntity<>(jobService.save(job), HttpStatus.CREATED);
+        jobService.save(job);
+        job.setCode("CODE" + job.getCompany().getCode() + job.getId());
+        jobService.save(job);
+        return new ResponseEntity<>(job, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -64,10 +73,25 @@ public class JobController {
 
     }
 
-    @PostMapping("/set/{id}")
+
+    @PutMapping("/set/{id}")
     public ResponseEntity<Job> setStatus(@PathVariable Long id) {
         return jobService.setStatus(id);
     }
 
+    @GetMapping("/current/opening/{id}")
+    public ResponseEntity<List<Job>> findCurrentOpeningJobsByCompany(@PathVariable Long id) {
+        List<Job> jobs = jobService.findCurrentOpeningJobsByCompany(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Job>> findJobsByCategoryId(@PathVariable Long id) {
+        return new ResponseEntity<>(jobService.findJobsByCategoryId(id), HttpStatus.OK);
+    }
 
+    @GetMapping("/company/{id}")
+    public ResponseEntity<List<Job>> findAllJobsByCompany(@PathVariable Long id) {
+        List<Job> jobs = jobService.findAllJobsByCompanySortByIdDesc(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
 }
