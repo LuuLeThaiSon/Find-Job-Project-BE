@@ -34,4 +34,9 @@ public class CategoryController {
     public ResponseEntity<List<Category>> findCategoriesByCompanyId(@PathVariable Long id) {
         return new ResponseEntity<>(categoryService.findCategoriesByJobId(id), HttpStatus.OK);
     }
+
+	@GetMapping("/company/{id}")
+	public ResponseEntity<List<Category>> findCategoriesByCompany(@PathVariable Long id) {
+		return new ResponseEntity<>(categoryService.findCategoriesByCompanyId(id), HttpStatus.OK);
+	}
 }

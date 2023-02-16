@@ -1,8 +1,11 @@
 package com.example.findjobbe.controller;
 
 
+import com.example.findjobbe.model.Category;
 import com.example.findjobbe.model.Company;
+import com.example.findjobbe.model.CompanyWithCategories;
 import com.example.findjobbe.model.Role;
+import com.example.findjobbe.service.ICategoryService;
 import com.example.findjobbe.service.ICompanyService;
 import com.example.findjobbe.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @CrossOrigin("*")
@@ -21,6 +25,8 @@ public class CompanyController {
 
     @Autowired
     private ICompanyService companyService;
+    @Autowired
+    private ICategoryService categoryService;
 
     @Autowired
     private IRoleService roleService;
@@ -72,6 +78,16 @@ public class CompanyController {
     public ResponseEntity<Long> countAllJobsByCompanyId(@PathVariable Long id) {
         Long count = companyService.countAllJobsByCompanyId(id);
         return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @GetMapping("/with_categories/{id}")
+    public ResponseEntity<CompanyWithCategories> findCompanyWithCategories(@PathVariable Long id) {
+        CompanyWithCategories companyWithCategories = new CompanyWithCategories();
+        Company company = companyService.findOne(id).get();
+        List<Category> categories = categoryService.findCategoriesByCompanyId(id);
+        companyWithCategories.setCompany(company);
+        companyWithCategories.setCategories(categories);
+        return new ResponseEntity<>(companyWithCategories, HttpStatus.OK);
     }
 
 }
