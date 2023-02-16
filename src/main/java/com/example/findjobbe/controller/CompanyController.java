@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Controller
 @CrossOrigin("*")
@@ -49,7 +49,13 @@ public class CompanyController {
 
     @PostMapping
     public ResponseEntity<Company> create(@RequestBody Company company) {
-        return new ResponseEntity<>(companyService.save(company), HttpStatus.CREATED);
+        companyService.save(company);
+        char[] ch = new char[3];
+        company.getShortName().getChars(0,3,ch,0);
+        String str = new String(ch);
+        company.setCode(str + (company.getId()-1) + (int)(((Math.random()) * ((9999 - 1000) + 1)) + 1000));
+        companyService.save(company);
+        return new ResponseEntity<>(company, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
