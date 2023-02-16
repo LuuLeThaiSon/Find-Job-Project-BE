@@ -87,4 +87,5 @@ public class JobController {
         List<Job> jobs = jobService.findAllJobsByCompanySortByIdDesc(id);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
+
 }
