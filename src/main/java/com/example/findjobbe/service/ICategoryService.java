@@ -7,4 +7,5 @@ import java.util.List;
 public interface ICategoryService extends ICoreCrud<Category, Long> {
 
     List<Category> findCategoriesByJobId(Long id);
+    List<Category>findCategoriesByCompanyId(Long id);
 }

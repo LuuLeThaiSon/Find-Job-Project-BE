@@ -1,8 +1,11 @@
 package com.example.findjobbe.controller;
 
 
+import com.example.findjobbe.model.Category;
 import com.example.findjobbe.model.Company;
+import com.example.findjobbe.model.CompanyWithCategories;
 import com.example.findjobbe.model.Role;
+import com.example.findjobbe.service.ICategoryService;
 import com.example.findjobbe.service.ICompanyService;
 import com.example.findjobbe.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @Controller
 @CrossOrigin("*")
 @RequestMapping("/companies")
@@ -21,6 +25,8 @@ public class CompanyController {
 
     @Autowired
     private ICompanyService companyService;
+    @Autowired
+    private ICategoryService categoryService;
 
     @Autowired
     private IRoleService roleService;
@@ -43,7 +49,13 @@ public class CompanyController {
 
     @PostMapping
     public ResponseEntity<Company> create(@RequestBody Company company) {
-        return new ResponseEntity<>(companyService.save(company), HttpStatus.CREATED);
+        companyService.save(company);
+        char[] ch = new char[3];
+        company.getShortName().getChars(0,3,ch,0);
+        String str = new String(ch);
+        company.setCode(str + (company.getId()-1) + (int)(((Math.random()) * ((9999 - 1000) + 1)) + 1000));
+        companyService.save(company);
+        return new ResponseEntity<>(company, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -72,6 +84,16 @@ public class CompanyController {
     public ResponseEntity<Long> countAllJobsByCompanyId(@PathVariable Long id) {
         Long count = companyService.countAllJobsByCompanyId(id);
         return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @GetMapping("/with_categories/{id}")
+    public ResponseEntity<CompanyWithCategories> findCompanyWithCategories(@PathVariable Long id) {
+        CompanyWithCategories companyWithCategories = new CompanyWithCategories();
+        Company company = companyService.findOne(id).get();
+        List<Category> categories = categoryService.findCategoriesByCompanyId(id);
+        companyWithCategories.setCompany(company);
+        companyWithCategories.setCategories(categories);
+        return new ResponseEntity<>(companyWithCategories, HttpStatus.OK);
     }
 
 }

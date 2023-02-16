@@ -38,4 +38,9 @@ public class CategoryService implements ICategoryService {
 	public List<Category> findCategoriesByJobId(Long id) {
 		return categoryRepository.findCategoriesByJobId(id);
 	}
+
+	@Override
+	public List<Category> findCategoriesByCompanyId(Long id) {
+		return categoryRepository.findCategoriesByCompanyId(id);
+	}
 }

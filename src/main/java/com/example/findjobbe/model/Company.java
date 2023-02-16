@@ -26,7 +26,6 @@ public class Company {
 	private String email;
 	@NotNull
 	@Size(min = 8)
-	@Min(value = 8)
 	private String password;
 	@NotNull
 	private String avatar;
@@ -41,8 +40,5 @@ public class Company {
 	private Role role;
 	private boolean status;
 	private String banner;
-
-	@Transient
-	private int countJobs;
 
 }
