@@ -22,4 +22,15 @@ public class EmailSenderImpl implements EmailSender {
 
         mailSender.send(simpleMailMessage);
     }
+
+    @Override
+    public void sendMailCandidate(String to, String subject, String messageC) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("vuminhtran027@gmail.com");
+        simpleMailMessage.setTo(to);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(messageC);
+
+        mailSender.send(simpleMailMessage);
+    }
 }

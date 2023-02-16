@@ -10,10 +10,13 @@ public class EmailMessage {
     private String subject;
     private String message;
 
-    public EmailMessage(String to, String subject, String message) {
+    private String messageC;
+
+    public EmailMessage(String to, String subject, String message, String messageC) {
         this.to = to;
         this.subject = subject;
         this.message = message;
+        this.messageC = messageC;
     }
 
     public String getTo() {
@@ -52,4 +55,12 @@ public class EmailMessage {
             .limit(targetStringLength)
             .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
             .toString();
+
+    public String getMessageC() {
+        return messageC;
+    }
+
+    public void setMessageC(String messageC) {
+        this.messageC = messageC;
+    }
 }

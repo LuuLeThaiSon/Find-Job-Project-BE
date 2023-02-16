@@ -23,4 +23,10 @@ public class EmailController {
         emailSender.sendMail(emailMessage.getTo(), emailMessage.getSubject(), emailMessage.getMessage());
         return new ResponseEntity<>(emailMessage, HttpStatus.OK);
     }
+
+    @PostMapping("/send-emailCandidate")
+    public ResponseEntity<EmailMessage> sendEmailCandidate(@RequestBody EmailMessage emailMessage) {
+        emailSender.sendMail(emailMessage.getTo(), emailMessage.getSubject(), emailMessage.getMessageC());
+        return new ResponseEntity<>(emailMessage, HttpStatus.OK);
+    }
 }
