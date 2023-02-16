@@ -34,6 +34,7 @@ public class JobController {
     public ResponseEntity<Job> creatJob(@RequestBody Job job){
         jobService.save(job);
         job.setCode("CODE" + job.getCompany().getCode() + job.getId());
+        jobService.save(job);
         return new ResponseEntity<>(job, HttpStatus.CREATED);
     }
 
