@@ -61,8 +61,8 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public List<Job> findJobsByTitleAndLocationAndCompanyAndSalaryMin(String text, Long locationId, Long categoryId) {
-        return jobRepository.findJobsByTitleAndLocationAndCompanyAndSalaryMin(text, locationId, categoryId);
+    public List<Job> findJobsByTitleAndLocationAndCompanyAndSalaryMin(String text, Long locationId, Long categoryId,Double salaryMin) {
+        return jobRepository.findJobsByTitleAndLocationAndCompanyAndSalaryMin(text, locationId, categoryId, salaryMin);
     }
 
     public List<Job> findAllJobsInCompany(Long id) {
@@ -77,5 +77,10 @@ public class JobService implements IJobService {
     @Override
     public List<Job> findAllJobsByCompanySortByIdDesc(Long id) {
         return jobRepository.findJobsByCompanyIdOrderByIdDesc(id);
+    }
+
+    @Override
+    public List<Job> findJobsByTitleContainingOrCompanyName(String text) {
+        return jobRepository.findJobsByTitleContainingOrCompanyName(text);
     }
 }

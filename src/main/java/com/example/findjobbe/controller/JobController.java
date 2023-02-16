@@ -86,11 +86,17 @@ public class JobController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Job>>  findJobsByTitleAndLocationAndCompanyAndSalaryMin(@RequestParam(name = "text") String text,
+    public ResponseEntity<List<Job>> findJobsByTitleAndLocationAndCompanyAndSalaryMin(@RequestParam(name = "text") String text,
                                                                                        @RequestParam(name = "locationId") Long locationId,
-                                                                                       @RequestParam(name = "categoryId") Long categoryId) {
-//                                                                                       @RequestParam(name = "salaryMin") Double salaryMin) {
-        List<Job> jobs = jobService.findJobsByTitleAndLocationAndCompanyAndSalaryMin(text,locationId,categoryId);
+                                                                                       @RequestParam(name = "categoryId") Long categoryId,
+                                                                                       @RequestParam(name = "salaryMin") Double salaryMin) {
+        List<Job> jobs = jobService.findJobsByTitleAndLocationAndCompanyAndSalaryMin('%' + text + '%',locationId,categoryId,salaryMin);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/input")
+    public ResponseEntity<List<Job>> findJobsByTitleContainingOrCompanyName(@RequestParam(name = "text") String text) {
+        List<Job> jobs = jobService.findJobsByTitleContainingOrCompanyName('%' + text + '%');
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 }
