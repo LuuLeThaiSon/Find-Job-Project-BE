@@ -12,11 +12,17 @@ public class EmailMessage {
 
     private String messageC;
 
-    public EmailMessage(String to, String subject, String message, String messageC) {
+    private String link;
+
+
+
+    public EmailMessage(String to, String subject, String message, String messageC, String link) {
         this.to = to;
         this.subject = subject;
         this.message = message;
         this.messageC = messageC;
+        this.link = link;
+
     }
 
     public String getTo() {
@@ -43,6 +49,14 @@ public class EmailMessage {
         this.message = message;
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     int leftLimit = 97;
 
     int rightLimit = 122;
@@ -63,4 +77,5 @@ public class EmailMessage {
     public void setMessageC(String messageC) {
         this.messageC = messageC;
     }
+
 }

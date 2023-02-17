@@ -22,4 +22,8 @@ public class Candidate {
 
 	private Boolean status;
 
+	private String address;
+
+	private String description;
+
 }
