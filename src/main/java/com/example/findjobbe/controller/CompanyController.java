@@ -1,10 +1,12 @@
 package com.example.findjobbe.controller;
 
 
+import com.example.findjobbe.model.Admin;
 import com.example.findjobbe.model.Category;
 import com.example.findjobbe.model.Company;
 import com.example.findjobbe.model.CompanyWithCategories;
 import com.example.findjobbe.model.Role;
+import com.example.findjobbe.service.IAdminService;
 import com.example.findjobbe.service.ICategoryService;
 import com.example.findjobbe.service.ICompanyService;
 import com.example.findjobbe.service.IRoleService;
@@ -31,6 +33,9 @@ public class CompanyController {
     @Autowired
     private IRoleService roleService;
 
+    @Autowired
+    private IAdminService adminService;
+
     @GetMapping
     public ResponseEntity<Iterable<Company>> findAllCompany() {
         return new ResponseEntity<>(companyService.findAll(), HttpStatus.OK);
@@ -39,6 +44,11 @@ public class CompanyController {
     @GetMapping("/role")
     public ResponseEntity<Iterable<Role>> findAllRole() {
         return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/admin")
+    public ResponseEntity<Iterable<Admin>> findAllAdmin() {
+        return new ResponseEntity<>(adminService.findAll(), HttpStatus.OK);
     }
 
 

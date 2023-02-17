@@ -67,6 +67,13 @@ public class JobController {
         return new ResponseEntity<>(jobService.save(job), HttpStatus.OK);
     }
 
+    @GetMapping("/quantity/{idCompany}")
+    public ResponseEntity<Iterable<Job>> findAllJobsInCompany(@PathVariable Long idCompany) {
+        return new ResponseEntity<>(jobService.findAllJobsInCompanyId(idCompany), HttpStatus.OK);
+
+    }
+
+
     @PutMapping("/set/{id}")
     public ResponseEntity<Job> setStatus(@PathVariable Long id) {
         return jobService.setStatus(id);

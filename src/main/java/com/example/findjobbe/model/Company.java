@@ -24,8 +24,6 @@ public class Company {
 	@NotNull
 	@Column(unique = true)
 	private String email;
-	@NotNull
-	@Size(min = 8)
 	private String password;
 	@NotNull
 	private String avatar;
