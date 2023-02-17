@@ -60,10 +60,6 @@ public class ApplyJobController {
 		return new ResponseEntity<>(applyJobService.findApplyJobByCandidate(id), HttpStatus.OK);
 	}
 
-//	@GetMapping("/check/{id}")
-//	public ResponseEntity<?> checkApplyJob(@PathVariable Long id) {
-//		return new ResponseEntity<>(applyJobService.checkApplyJob(id), HttpStatus.OK);
-//	}
 
 	@PostMapping ("/test/{id}")
 	public ResponseEntity<List<Boolean>> test(@PathVariable Long id, @RequestBody List<Job> jobs) {

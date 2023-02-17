@@ -15,8 +15,6 @@ import java.util.Optional;
 public class ApplyJobService implements IApplyJobService {
 	@Autowired
 	private ApplyJobRepository applyJobRepository;
-	@Autowired
-	private JobRepository jobRepository;
 	@Override
 	public List<ApplyJob> findAll() {
 		return applyJobRepository.findAll();
