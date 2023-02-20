@@ -3,6 +3,7 @@ package com.example.findjobbe.controller;
 import com.example.findjobbe.model.ApplyJob;
 import com.example.findjobbe.model.Job;
 import com.example.findjobbe.service.impl.ApplyJobService;
+import com.example.findjobbe.service.impl.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import java.util.List;
 public class ApplyJobController {
 	@Autowired
 	private ApplyJobService applyJobService;
+	@Autowired
+	private JobService jobService;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ApplyJob> findOne(@PathVariable Long id) {
@@ -46,7 +49,7 @@ public class ApplyJobController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ApplyJob> applyAssess(@PathVariable Long id) {
+	public ResponseEntity<ApplyJob> acceptJob(@PathVariable Long id) {
 		if (!applyJobService.findOne(id).isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -60,8 +63,8 @@ public class ApplyJobController {
 		return new ResponseEntity<>(applyJobService.findApplyJobByCandidate(id), HttpStatus.OK);
 	}
 
-	@PostMapping ("/test/{id}")
-	public ResponseEntity<List<Boolean>> test(@PathVariable Long id, @RequestBody List<Job> jobs) {
+	@PostMapping ("/checkApply/{id}")
+	public ResponseEntity<List<Boolean>> checkApply(@PathVariable Long id, @RequestBody List<Job> jobs) {
 		List<Boolean> booleans = new ArrayList<>();
 		for (int i = 0; i < jobs.size(); i++) {
 			if (applyJobService.checkApplyJob(id, jobs.get(i).getId()).isPresent()) {
@@ -69,5 +72,22 @@ public class ApplyJobController {
 			} else booleans.add(false);
 		}
 		return new ResponseEntity<>(booleans, HttpStatus.OK);
+	}
+
+	@PostMapping ("/checkApplyAccept/{id}")
+	public ResponseEntity<List<Boolean>> checkApplyAccept(@PathVariable Long id, @RequestBody List<Job> jobs) {
+		List<Boolean> booleans = new ArrayList<>();
+		for (int i = 0; i < jobs.size(); i++) {
+			if (applyJobService.checkApplyJob(id, jobs.get(i).getId()).isPresent() && applyJobService.checkApplyJob(id, jobs.get(i).getId()).get().isStatus()) {
+				booleans.add(true);
+			} else booleans.add(false);
+		}
+		return new ResponseEntity<>(booleans, HttpStatus.OK);
+	}
+
+	@GetMapping("/candidate/job/{id}")
+	public ResponseEntity<List<ApplyJob>> findAllApplyJob(@PathVariable Long id) {
+		Job job = jobService.findOne(id).get();
+		return new ResponseEntity<>(applyJobService.findApplyJobByJob(job), HttpStatus.OK);
 	}
 }
