@@ -18,7 +18,12 @@ public interface IJobService extends ICoreCrud<Job, Long>{
 
     List<Job> findJobsByCategoryId(Long id);
 
-    List<Job> findJobsByTitleAndLocationAndCompanyAndSalaryMin(String text, Long locationId, Long categoryId, Double salaryMin);
+    List<Job> findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId(String text, Long locationId, Long categoryId);
 
     List<Job> findJobsByTitleContainingOrCompanyName(String text);
+
+    List<Job> findJobsByLocationId(Long id);
+    List<Job> findJobsByTitleContainingAndCategoryId(String text, Long id);
+    List<Job> findJobsByTitleContainingAndLocationId(String text, Long id);
+    List<Job>findJobsByLocationIdAndCategoryId(Long locationId, Long categoryId);
 }

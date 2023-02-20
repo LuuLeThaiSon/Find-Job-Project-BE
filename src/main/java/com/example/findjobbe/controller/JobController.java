@@ -84,8 +84,8 @@ public class JobController {
         List<Job> jobs = jobService.findCurrentOpeningJobsByCompany(id);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
-    @GetMapping("/category/{id}")
-    public ResponseEntity<List<Job>> findJobsByCategoryId(@PathVariable Long id) {
+    @GetMapping("/search/category")
+    public ResponseEntity<List<Job>> findJobsByCategoryId(@RequestParam(name = "categoryId") Long id) {
         return new ResponseEntity<>(jobService.findJobsByCategoryId(id), HttpStatus.OK);
     }
 
@@ -96,11 +96,10 @@ public class JobController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Job>> findJobsByTitleAndLocationAndCompanyAndSalaryMin(@RequestParam(name = "text") String text,
+    public ResponseEntity<List<Job>> findJobsByTitleAndLocationAndCompany(@RequestParam(name = "text") String text,
                                                                                        @RequestParam(name = "locationId") Long locationId,
-                                                                                       @RequestParam(name = "categoryId") Long categoryId,
-                                                                                       @RequestParam(name = "salaryMin") Double salaryMin) {
-        List<Job> jobs = jobService.findJobsByTitleAndLocationAndCompanyAndSalaryMin('%' + text + '%',locationId,categoryId,salaryMin);
+                                                                                       @RequestParam(name = "categoryId") Long categoryId) {
+        List<Job> jobs = jobService.findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId('%' + text + '%',locationId,categoryId);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
@@ -109,4 +108,33 @@ public class JobController {
         List<Job> jobs = jobService.findJobsByTitleContainingOrCompanyName('%' + text + '%');
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
+
+    @GetMapping("/search/location")
+    public ResponseEntity<List<Job>> findJobsByLocationId(@RequestParam(name = "locationId") Long id) {
+        List<Job> jobs = jobService.findJobsByLocationId(id);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/text/location")
+    public ResponseEntity<List<Job>> findJobsByTitleContainingAndLocationId(@RequestParam(name = "text") String text,
+                                                                            @RequestParam(name = "locationId") Long locationId) {
+        List<Job> jobs = jobService.findJobsByTitleContainingAndLocationId('%' + text + '%', locationId);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/text/category")
+    public ResponseEntity<List<Job>> findJobsByTitleContainingAndCategoryId(@RequestParam(name = "text") String text,
+                                                                            @RequestParam(name = "categoryId") Long categoryId) {
+        List<Job> jobs = jobService.findJobsByTitleContainingAndCategoryId('%' + text + '%', categoryId);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+     @GetMapping("/search/location/category")
+    public ResponseEntity<List<Job>> findJobsByLocationIdAndCategoryId(@RequestParam(name = "locationId") Long locationId, @RequestParam(name = "categoryId") Long categoryId) {
+        List<Job> jobs = jobService.findJobsByLocationIdAndCategoryId(locationId, categoryId);
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+
+
 }

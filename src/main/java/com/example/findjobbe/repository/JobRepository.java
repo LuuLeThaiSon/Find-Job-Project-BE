@@ -26,11 +26,29 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     @Query(value = "select * from job j " +
             "join category c on c.id = j.category_id " +
             "join location l on l.id = j.location_id " +
-            "where j.title like ?1 and c.id= ?2 and l.id= ?3 and j.salary_min= ?4 ", nativeQuery = true)
-    List<Job> findJobsByTitleAndLocationAndCompanyAndSalaryMin(String text, Long locationId, Long categoryId, Double salaryMin);
+            "where j.title like ?1 and c.id= ?2 and l.id= ?3", nativeQuery = true)
+    List<Job> findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId(String text, Long locationId, Long categoryId);
 
-    @Query(value = "select * from job j join company c on c.id = j.company_id where j.title like ?1 or c.name like ?1", nativeQuery = true)
+    @Query(value = "select * from job j " +
+            "join company c on c.id = j.company_id " +
+            "where j.title like ?1 or c.name like ?1", nativeQuery = true)
     List<Job> findJobsByTitleContainingOrCompanyName(String text);
 
+    @Query(value = "select * from job j " +
+            "where j.location_id = ?1", nativeQuery = true)
+    List<Job> findJobsByLocationId(Long id);
 
+    @Query(value = "select * from job j " +
+            "join company c on c.id = j.company_id " +
+            "where (j.title like ?1 or c.name like ?1) and  j.category_id = ?2",nativeQuery = true)
+    List<Job> findJobsByTitleContainingAndCategoryId(String text, Long id);
+
+    @Query(value = "select * from job j " +
+            "join company c on c.id = j.company_id " +
+            "where (j.title like ?1 or c.name like ?1) and  j.location_id = ?2",nativeQuery = true)
+    List<Job>findJobsByTitleContainingAndLocationId(String text, Long id);
+
+    @Query(value = "select * from job j " +
+            "where j.location_id = ?1 and j.category_id = ?2", nativeQuery = true)
+    List<Job>findJobsByLocationIdAndCategoryId(Long locationId, Long categoryId);
 }
