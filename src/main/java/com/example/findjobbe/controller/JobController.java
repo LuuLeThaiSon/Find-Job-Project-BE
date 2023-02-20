@@ -1,6 +1,8 @@
 package com.example.findjobbe.controller;
 
+import com.example.findjobbe.model.Company;
 import com.example.findjobbe.model.Job;
+import com.example.findjobbe.service.impl.CompanyService;
 import com.example.findjobbe.service.impl.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class JobController {
     @Autowired
     private JobService jobService;
+    @Autowired
+    private CompanyService companyService;
 
     @GetMapping
     public ResponseEntity<List<Job>> showAll() {
@@ -33,7 +37,9 @@ public class JobController {
     @PostMapping
     public ResponseEntity<Job> creatJob(@RequestBody Job job){
         jobService.save(job);
-        job.setCode("CODE" + job.getCompany().getCode() + job.getId());
+        Company company = companyService.findOne(job.getCompany().getId()).get();
+        String ccode = company.getCode();
+        job.setCode("CODE" + ccode + job.getId());
         jobService.save(job);
         return new ResponseEntity<>(job, HttpStatus.CREATED);
     }

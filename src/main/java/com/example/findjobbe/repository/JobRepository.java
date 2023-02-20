@@ -16,7 +16,8 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     @Query(value = "select j from Job j where j.expiredDate >= current_date and j.status = true")
     List<Job> findAllByStatusIsTrueAndAndExpiredDate();
 
-    @Query(value = "select * from job join category_job cj on job.id = cj.job_id join category c on c.id = cj.category_id where c.id = ?1",nativeQuery = true)
+    @Query(value = "select * from job j where j.category_id = ?1 " +
+            "and j.status = true and j.expired_date >= now()",nativeQuery = true)
     List<Job> findJobsByCategoryId(Long id);
 
     @Query(value = "SELECT j from Job j where j.status = true and j.expiredDate >= current_date and j.company.id = ?1")
@@ -24,29 +25,35 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     @Transactional
     @Query(value = "select * from job j join company c on c.id = j.company_id " +
-            "where (j.title like ?1 or c.name like ?1) and j.location_id= ?2 and j.category_id= ?3", nativeQuery = true)
+            "where (j.title like ?1 or c.name like ?1) and j.location_id= ?2 and j.category_id= ?3 " +
+            "and j.status = true and j.expired_date >= now()", nativeQuery = true)
     List<Job> findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId(String text, Long locationId, Long categoryId);
 
     @Query(value = "select * from job j " +
             "join company c on c.id = j.company_id " +
-            "where j.title like ?1 or c.name like ?1", nativeQuery = true)
+            "where j.title like ?1 or c.name like ?1 " +
+            "and j.status = true and j.expired_date >= now()", nativeQuery = true)
     List<Job> findJobsByTitleContainingOrCompanyName(String text);
 
     @Query(value = "select * from job j " +
-            "where j.location_id = ?1", nativeQuery = true)
+            "where j.location_id = ?1 " +
+            "and j.status = true and j.expired_date >= now()", nativeQuery = true)
     List<Job> findJobsByLocationId(Long id);
 
     @Query(value = "select * from job j " +
             "join company c on c.id = j.company_id " +
-            "where (j.title like ?1 or c.name like ?1) and  j.category_id = ?2",nativeQuery = true)
+            "where (j.title like ?1 or c.name like ?1) and  j.category_id = ?2 " +
+            "and j.status = true and j.expired_date >= now()",nativeQuery = true)
     List<Job> findJobsByTitleContainingAndCategoryId(String text, Long id);
 
     @Query(value = "select * from job j " +
             "join company c on c.id = j.company_id " +
-            "where (j.title like ?1 or c.name like ?1) and  j.location_id = ?2",nativeQuery = true)
+            "where (j.title like ?1 or c.name like ?1) and  j.location_id = ?2 " +
+            "and j.status = true and j.expired_date >= now()",nativeQuery = true)
     List<Job>findJobsByTitleContainingAndLocationId(String text, Long id);
 
     @Query(value = "select * from job j " +
-            "where j.location_id = ?1 and j.category_id = ?2", nativeQuery = true)
+            "where j.location_id = ?1 and j.category_id = ?2 " +
+            "and j.status = true and j.expired_date >= now()", nativeQuery = true)
     List<Job>findJobsByLocationIdAndCategoryId(Long locationId, Long categoryId);
 }
