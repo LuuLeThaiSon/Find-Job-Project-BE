@@ -99,7 +99,7 @@ public class JobController {
     public ResponseEntity<List<Job>> findJobsByTitleAndLocationAndCompany(@RequestParam(name = "text") String text,
                                                                                        @RequestParam(name = "locationId") Long locationId,
                                                                                        @RequestParam(name = "categoryId") Long categoryId) {
-        List<Job> jobs = jobService.findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId('%' + text + '%',locationId,categoryId);
+        List<Job> jobs = jobService. findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId('%' + text + '%',locationId,categoryId);
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 

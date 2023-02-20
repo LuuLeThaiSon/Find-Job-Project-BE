@@ -23,10 +23,8 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     List<Job> findCurrentOpeningJobsByCompany(Long id);
 
     @Transactional
-    @Query(value = "select * from job j " +
-            "join category c on c.id = j.category_id " +
-            "join location l on l.id = j.location_id " +
-            "where j.title like ?1 and c.id= ?2 and l.id= ?3", nativeQuery = true)
+    @Query(value = "select * from job j join company c on c.id = j.company_id " +
+            "where (j.title like ?1 or c.name like ?1) and j.location_id= ?2 and j.category_id= ?3", nativeQuery = true)
     List<Job> findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId(String text, Long locationId, Long categoryId);
 
     @Query(value = "select * from job j " +
