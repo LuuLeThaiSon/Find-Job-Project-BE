@@ -1,6 +1,8 @@
 package com.example.findjobbe.service.impl;
 
 import com.example.findjobbe.model.ApplyJob;
+import com.example.findjobbe.model.Candidate;
+import com.example.findjobbe.model.Job;
 import com.example.findjobbe.repository.ApplyJobRepository;
 import com.example.findjobbe.service.IApplyJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +57,20 @@ public class ApplyJobService implements IApplyJobService {
 		return null;
 	}
 
+
+	@Override
+	public List<Candidate> findAllCandidateApplyJobOfCompany(Long id) {
+		return applyJobRepository.findAllCandidateApplyJobOfCompany(id);
+	}
+
+	@Override
+	public List<ApplyJob> findApplyJobByJob(Job job) {
+		return applyJobRepository.findApplyJobByJob(job);
+	}
+
+	@Override
+	public ApplyJob findApplyJob(Long candidateId, Long jobId) {
+		return applyJobRepository.findApplyJob(candidateId, jobId);
+	}
 
 }
