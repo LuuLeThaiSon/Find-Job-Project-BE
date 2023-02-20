@@ -60,6 +60,11 @@ public class JobService implements IJobService {
         return jobRepository.findJobsByCategoryId(id);
     }
 
+    @Override
+    public List<Job> findJobsByCandidateId(Long id) {
+        return jobRepository.findJobsByCandidateId(id);
+    }
+
     public List<Job> findAllJobsInCompany(Long id) {
         return jobRepository.findJobsByCompanyId(id);
     }

@@ -43,6 +43,7 @@ public class EmailMessage {
 
     public String getMessage() {
         return generateString;
+
     }
 
     public void setMessage(String message) {
