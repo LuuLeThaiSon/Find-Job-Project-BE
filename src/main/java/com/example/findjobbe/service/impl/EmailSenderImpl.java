@@ -15,7 +15,7 @@ public class EmailSenderImpl implements EmailSender {
     @Override
     public void sendMail(String to, String subject, String message) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("vuminhtran027@gmail.com");
+        simpleMailMessage.setFrom("404teamn1@gmail.com");
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(message);
@@ -26,7 +26,7 @@ public class EmailSenderImpl implements EmailSender {
     @Override
     public void sendMailCandidate(String to, String subject, String messageC) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("vuminhtran027@gmail.com");
+        simpleMailMessage.setFrom("404teamn1@gmail.com");
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(messageC);

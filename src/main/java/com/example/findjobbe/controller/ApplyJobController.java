@@ -1,8 +1,11 @@
 package com.example.findjobbe.controller;
 
 import com.example.findjobbe.model.ApplyJob;
+import com.example.findjobbe.model.Candidate;
 import com.example.findjobbe.model.Job;
 import com.example.findjobbe.service.impl.ApplyJobService;
+import com.example.findjobbe.service.impl.JobService;
+import com.example.findjobbe.service.impl.CandidateService;
 import com.example.findjobbe.service.impl.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -20,6 +24,10 @@ public class ApplyJobController {
 	private ApplyJobService applyJobService;
 	@Autowired
 	private JobService jobService;
+
+
+	@Autowired
+	private CandidateService candidateService;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ApplyJob> findOne(@PathVariable Long id) {
@@ -47,6 +55,7 @@ public class ApplyJobController {
 		applyJobService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ApplyJob> acceptJob(@PathVariable Long id) {
@@ -90,4 +99,12 @@ public class ApplyJobController {
 		Job job = jobService.findOne(id).get();
 		return new ResponseEntity<>(applyJobService.findApplyJobByJob(job), HttpStatus.OK);
 	}
+
+	@DeleteMapping ("/delete/{candidateId}&{jobId}")
+	public ResponseEntity<ApplyJob> deleteJobCandidate(@PathVariable Long candidateId, @PathVariable Long jobId) {
+		applyJobService.deleteApplyJobs(candidateId, jobId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+
 }
