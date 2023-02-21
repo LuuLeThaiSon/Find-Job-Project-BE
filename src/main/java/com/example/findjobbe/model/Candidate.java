@@ -24,4 +24,5 @@ public class Candidate {
 
 	private String description;
 
+	private String banner;
 }
