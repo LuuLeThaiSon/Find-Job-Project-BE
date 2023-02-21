@@ -142,8 +142,6 @@ public class JobController {
     }
 
 
-
-
     @GetMapping("/candidate/{id}")
     public ResponseEntity<List<Job>> findAllJobsByCandidate(@PathVariable Long id) {
         List<Job> jobs = jobService.findJobsByCandidateId(id);

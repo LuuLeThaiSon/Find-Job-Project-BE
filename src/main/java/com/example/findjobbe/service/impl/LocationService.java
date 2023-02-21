@@ -31,4 +31,9 @@ public class LocationService implements ILocationService {
 	public void delete(Long aLong) {
 
 	}
+
+	@Override
+	public List<Location> findAllOrderByName() {
+		return locationRepository.findAllOrderByName();
+	}
 }

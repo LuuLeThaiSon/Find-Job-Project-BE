@@ -18,7 +18,7 @@ public class LocationController {
 
 	@GetMapping
 	public ResponseEntity<List<Location>> findAll() {
-		return new ResponseEntity<>(locationService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(locationService.findAllOrderByName(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")

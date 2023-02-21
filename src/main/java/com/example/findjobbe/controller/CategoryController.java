@@ -22,7 +22,7 @@ public class CategoryController {
 
 	@GetMapping
 	public ResponseEntity<List<Category>> findAll() {
-		return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(categoryService.findAllCategoriesOrderByNameAsc(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
@@ -39,4 +39,6 @@ public class CategoryController {
 	public ResponseEntity<List<Category>> findCategoriesByCompany(@PathVariable Long id) {
 		return new ResponseEntity<>(categoryService.findCategoriesByCompanyId(id), HttpStatus.OK);
 	}
+
+
 }

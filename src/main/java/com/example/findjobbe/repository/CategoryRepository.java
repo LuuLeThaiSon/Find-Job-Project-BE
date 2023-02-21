@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(value = "select category.id,category.name from category join category_company cc on category.id = cc.category_id join company c on c.id = cc.company_id where company_id = ?1",nativeQuery = true)
     List<Category>findCategoriesByCompanyId(Long id);
 
+    @Query(value = "select c from Category c ORDER BY c.name ASC")
+    List<Category>findAllCategoriesOrderByNameAsc();
 }
