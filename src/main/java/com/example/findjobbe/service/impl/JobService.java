@@ -61,6 +61,11 @@ public class JobService implements IJobService {
     }
 
     @Override
+    public List<Job> findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId(String text, Long locationId, Long categoryId) {
+        return jobRepository.findJobsByTitleContainingOrCompanyNameAndLocationIdAndCAndCategoryId(text, locationId, categoryId);
+    }
+
+    @Override
     public List<Job> findJobsByCandidateId(Long id) {
         return jobRepository.findJobsByCandidateId(id);
     }
@@ -83,4 +88,30 @@ public class JobService implements IJobService {
     public List<Job> findAllJobsInCompanyId(Long id) {
         return jobRepository.findJobsByCompanyId(id);
     }
+
+    @Override
+    public List<Job> findJobsByTitleContainingOrCompanyName(String text) {
+        return jobRepository.findJobsByTitleContainingOrCompanyName(text);
+    }
+
+    @Override
+    public List<Job> findJobsByLocationId(Long id) {
+        return jobRepository.findJobsByLocationId(id);
+    }
+
+    @Override
+    public List<Job> findJobsByTitleContainingAndCategoryId(String text, Long id) {
+        return jobRepository.findJobsByTitleContainingAndCategoryId(text, id);
+    }
+
+    @Override
+    public List<Job> findJobsByTitleContainingAndLocationId(String text, Long id) {
+        return jobRepository.findJobsByTitleContainingAndLocationId(text,id);
+    }
+
+    @Override
+    public List<Job> findJobsByLocationIdAndCategoryId(Long locationId, Long categoryId) {
+        return jobRepository.findJobsByLocationIdAndCategoryId(locationId,categoryId);
+    }
+
 }
