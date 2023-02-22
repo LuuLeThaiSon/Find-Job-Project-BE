@@ -57,6 +57,12 @@ public class ApplyJobService implements IApplyJobService {
 		return null;
 	}
 
+	@Override
+	@Transactional
+	public void deleteApplyJobByJob(Long id) {
+		applyJobRepository.deleteApplyJobByJob(id);
+	}
+
 
 	@Override
 	public List<Candidate> findAllCandidateApplyJobOfCompany(Long id) {

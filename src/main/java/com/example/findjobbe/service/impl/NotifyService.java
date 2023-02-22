@@ -8,6 +8,7 @@ import com.example.findjobbe.service.INotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -54,6 +55,12 @@ public class NotifyService implements INotifyService {
 	@Override
 	public Integer countUnreadCompanyNotify(Long id) {
 		return notifyRepository.countUnreadCompanyNotify(id);
+	}
+
+	@Override
+	@Transactional
+	public void deleteNotifyByJob(Long id) {
+		notifyRepository.deleteNotifyByJob(id);
 	}
 
 	public List<NotifyType> findAllType() {

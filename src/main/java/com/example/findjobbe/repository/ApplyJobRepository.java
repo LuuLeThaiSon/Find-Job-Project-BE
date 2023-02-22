@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,4 +29,8 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob, Long> {
 	List<ApplyJob> findApplyJobByJob(Job job);
 	@Query(value = "select * from apply_job where candidate_id = ?1 and job_id = ?2", nativeQuery = true)
 	ApplyJob findApplyJob(Long candidateId, Long jobId);
+
+	@Modifying
+	@Query(value = "delete from apply_job where job_id = ?1", nativeQuery = true)
+	void deleteApplyJobByJob(Long id);
 }

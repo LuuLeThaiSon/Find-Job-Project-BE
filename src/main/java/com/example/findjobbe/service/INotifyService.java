@@ -9,5 +9,6 @@ public interface INotifyService extends ICoreCrud<Notify, Long> {
 	List<Notify> findAllNotifyOfCompany(Long id);
 	Integer countUnreadCandidateNotify(Long id);
 	Integer countUnreadCompanyNotify(Long id);
+	void deleteNotifyByJob(Long id);
 
 }
