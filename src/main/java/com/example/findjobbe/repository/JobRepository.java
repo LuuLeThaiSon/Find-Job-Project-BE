@@ -31,7 +31,7 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     @Query(value = "select * from job j " +
             "join company c on c.id = j.company_id " +
-            "where j.title like ?1 or c.name like ?1 " +
+            "where (j.title like ?1 or c.name like ?1) " +
             "and j.status = true and j.expired_date >= now()", nativeQuery = true)
     List<Job> findJobsByTitleContainingOrCompanyName(String text);
 
