@@ -36,7 +36,7 @@ public class GmailMessage {
     }
 
     public String getHtmlContent() {
-        return htmlContent + generateString;
+        return htmlContent;
     }
 
     public void setHtmlContent(String htmlContent) {
