@@ -1,6 +1,32 @@
 version: '3'
 services:
+  db:
+    container_name: findjob-db
+    hostname: findjob-db
+    image: dongnam0106/mysql
+    restart: always
+    ports:
+      - "3308:3306"
+    volumes:
+      - findjob-db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: find_job_project
+      MYSQL_USER: findjob
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+#      MYSQL_ALLOW_EMPTY_PASSWORD: true
   app:
+    container_name: findjob-be
+    hostname: findjob-be
+    image: dongnam0106/be
+    depends_on:
+      - db
     build: ../
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/find_job_project?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: findjob
+      SPRING_DATASOURCE_PASSWORD: 123456
+volumes:
+  findjob-db:
